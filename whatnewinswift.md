@@ -1,4 +1,4 @@
-## What's new in Swift](https://developer.apple.com/videos/play/wwdc2020/10170/)
+## [What's new in Swift](https://developer.apple.com/videos/play/wwdc2020/10170/)
 
 
 
@@ -11,7 +11,7 @@
 
 #### Code Size
 
-- 바이너리(앱) 사이즈를 굉장히 줄였다. (Objective-C 버젼보다 1.5배 코드사이즈가 작다.
+- 바이너리(앱) 사이즈를 굉장히 줄였다. (Objective-C 버젼보다 1.5배 코드사이즈가 작다.)
 
  <img src="whatnewinswift.assets/image-20200822150841584.png" alt="image-20200822150841584" style="zoom:33%;" />
 
@@ -20,11 +20,9 @@
 ![image-20200822151810572](whatnewinswift.assets/image-20200822151810572.png)
 
 - 위의 예시에서 나온 SwiftUI로 만든 오픈소스앱 : https://github.com/Dimillian/MovieSwiftUI
-
 - 위의 예시의 경우 바이너리 사이즈가 43프로만큼 줄었다.
 
 - 바이너리 사이즈는 다운로드 시간에 영향을 미친다.
-
 - 또한 바이너리 사이즈는 앱이 실행 중일 때 `clean memory`ㄹㅏ고 불리는 메모리의 일부이다. 
   
 	- clean memory는 쉽게 말해서 필요에 의해서 얼마든지 reload될 수 있는 비울 수 있는 메모리 영역이다.(?)
@@ -32,9 +30,7 @@
 	
 	- clean memory영역은 dirty memory라고 불리는 영역보다 덜 중요하다.(less critical)
 	- dirty memory is the memory the application allocates and manipulates at runtime.
-	
-- dirt memory 영역이 향상되었다.
-
+- dirty memory 영역이 향상되었다.
 - Swift의 value type 사용은 reference type based language에 비해 몇가지 근본적인 이점이 있다.
 - 아래에서 살펴보자.
 
@@ -215,11 +211,29 @@
 
 ![image-20200824031650980](whatnewinswift.assets/image-20200824031650980.png)
 
+- 더 명확함을 나타낼 수 있다. (결과를 더 쉽게 예측할 수 있다.)
+
 ![image-20200824031708917](whatnewinswift.assets/image-20200824031708917.png)
 
 
 
 #### KeyPath exrpessions as functions(SE-0249)
+
+- KeyPaths are tempting alternative to function parameters
+
+- 함수의 파라미터로 keypath를 사용할 수 있음.
+
+```swift
+array.map { $0.value }
+array.map(\.value)
+```
+
+- 함수의 파라미터로 클로져를 넘겨주는 대신 KeyPath를 넘겨줌.
+- 클로져를 숨길 수 있다. > 발표에서는 아래와 같이.
+
+![image-20200824095434943](whatnewinswift.assets/image-20200824095434943.png)
+
+
 
 - 이해하기 쉬운 코드 : [참고링크](https://medium.com/better-programming/using-key-path-expressions-as-functions-in-swift-f0fe650ef7dc)
 
@@ -286,9 +300,77 @@
 
 #### Embedded DSL Enhancemnet
 
-- 
+- 스위프트는 작년부터 embedded dsl을 지원하기 시작했다. (to power SwiftUI's declarative syntax.)
+- 이로 인해 자식뷰들을 클로져안에 선언하거나, 클로져 안에 if-else 문을 넣을 수 있었다.
+
+![image-20200824100517225](whatnewinswift.assets/image-20200824100517225.png)
+
+- Swift 5.3부터는 pattern matching control flow statements(`if-let` 이라든지 `switch` 같은) 를 지원
+
+![image-20200824101204132](whatnewinswift.assets/image-20200824101204132.png)
+
+
+
+- builder inference
+- 아래와 같이 써줘야 했던걸
+![image-20200824101351675](whatnewinswift.assets/image-20200824101351675.png)
+- 아래와 같이 생략할 수 있게 됐다. (컴파일러가 프로토콜 요구사항으로부터 어떻게 이것들을 추론해야하는지 안다.)![image-20200824101419918](whatnewinswift.assets/image-20200824101419918.png)
+
+
+
+
+
+### SDK
+
 
 #### Float16
 
 - 16비트 float이 추가됨.
+
+#### Apple Archive
+
+- a new modular archive format based on the battle-tested technology
+- Apple uses to deliver OS updates.
+
+![image-20200824102429717](whatnewinswift.assets/image-20200824102429717.png)
+
+- 영상에는 어떻게 Apple archive를 쓰는지 내용이 간략하게 나옵니다. (import AppleArchive)
+
+
+
+#### OSLog
+
+`logger.log("Order received from customer \(name)")`
+
+![image-20200824102613626](whatnewinswift.assets/image-20200824102613626.png)
+
+
+
+#### Swift Numerics
+
+- github.com/apple/swift-numerics
+- Swift에서의 숫자관련해서 기능들에 대한 추가
+- `import Numerics`
+
+![image-20200824102827514](whatnewinswift.assets/image-20200824102827514.png)
+
+
+
+#### Swift ArgumentParser
+
+- github.com/apple/swift-argument-parser
+
+![image-20200824102907771](whatnewinswift.assets/image-20200824102907771.png)
+
+
+
+![image-20200824103615859](whatnewinswift.assets/image-20200824103615859.png)
+
+
+
+
+
+#### 그 외에
+
+- https://github.com/apple/swift-standard-library-preview
 
